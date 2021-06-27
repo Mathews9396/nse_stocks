@@ -106,22 +106,6 @@ exports.authUserLogin = (req, res) => {
     }
 }
 
-exports.createStocks = (req, res) => {
-    var createStatament = "CREATE TABLE stocks (Sl_No int, Name char(50), Market_Price float(24), Market_Cap float(24), Stock float(24), Dividend float(24), ROCE float(24), ROE float(24), DebtToEquity float(24), EPS float(24), Reserves float(24), Debt float(24))"
-
-    sql.query(createStatament, function (err) {
-        if (err)
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while creating the Customer."
-            });
-        else {
-            console.log("success");
-            res.send({ message: "Table created" });
-        }
-    })
-}
-
 exports.getAllStocks = (req, res) => {
     var getStatament = "SELECT * FROM stocks"
 
@@ -194,6 +178,22 @@ exports.getStockDetail = (req, res) => {
                 });
             }
 
+        }
+    })
+}
+
+exports.createStocks = (req, res) => {
+    var createStatament = "CREATE TABLE stocks (Sl_No int, Name char(50), Market_Price float(24), Market_Cap float(24), Stock float(24), Dividend float(24), ROCE float(24), ROE float(24), DebtToEquity float(24), EPS float(24), Reserves float(24), Debt float(24))"
+
+    sql.query(createStatament, function (err) {
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while creating the Customer."
+            });
+        else {
+            console.log("success");
+            res.send({ message: "Table created" });
         }
     })
 }

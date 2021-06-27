@@ -53,13 +53,13 @@ app.post('/login', stocks.userLogin, (req,res) => {
 
 app.post("/sign-in", stocks.authUserLogin);
 
-app.post("/create-table", stocks.createStocks);
+app.post("/user/create-table", stocks.createStocks);
 
-app.post("/add-data", stocks.importData);
+app.post("/user/add-data", stocks.importData);
 
-app.post("/delete-table", stocks.deleteStocks);
+app.post("/user/delete-table", stocks.deleteStocks);
 
-app.post("/delete-data", stocks.deleteData);
+app.post("/user/delete-data", stocks.deleteData);
 
 const path = require('path');
 if (process.env.NODE_ENV === 'production') {
