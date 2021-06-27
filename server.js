@@ -6,7 +6,7 @@ const authJwt = require('./middleware/auth');
 
 // parse requests of content-type: application/json
 app.use(express.json());
-app.use(express.static('build'));
+// app.use(express.static('build'));
 
 const whitelist = ['http://localhost:3000', 'http://localhost:8080']
 const corsOptions = {
@@ -64,10 +64,10 @@ app.post("/user/delete-data", stocks.deleteData);
 const path = require('path');
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
-  app.use(express.static(path.join(__dirname, 'client/build')));
+  app.use(express.static(path.join(__dirname, 'stocks-app/build')));
 // Handle React routing, return all requests to React app
   app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'stocks-app/build', 'index.html'));
   });
 }
 
