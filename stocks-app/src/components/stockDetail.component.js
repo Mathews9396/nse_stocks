@@ -13,7 +13,7 @@ function StockDetail({ match }) {
     console.log(match);
 
     const fetchItem = async () => {
-        await axios.get(`http://localhost:3001/stocks/all/${match.params.id}`,)
+        await axios.get(`/stocks/all/${match.params.id}`,)
             .then((response) => {
                 var outputStock = response.data.data[0]
                 console.log(outputStock);

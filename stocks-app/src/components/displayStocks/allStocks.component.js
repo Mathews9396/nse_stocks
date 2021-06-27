@@ -12,7 +12,7 @@ function AllStocks() {
     const [items, setItems] = useState([]);
 
     const fetchItems = async () => {
-        await axios.get('http://localhost:3001/stocks/all',)
+        await axios.get('/stocks/all',)
             .then((response) => {
                 console.log(response.data.data);
                 setItems(response.data.data);

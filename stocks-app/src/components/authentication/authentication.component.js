@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import '../../App.css';
 
+const baseUrl='/api'
+
 function Authentication() {
 
   const [usernameReg, setUsernameReg] = useState('');
@@ -13,7 +15,7 @@ function Authentication() {
   const [loginStatus, setLoginStatus] = useState('');
 
   const register = () => {
-    axios.post('http://localhost:3001/register', {
+    axios.post('/register', {
       username: usernameReg,
       password: passwordReg
     }).then((response) => {
@@ -25,7 +27,7 @@ function Authentication() {
   }
 
   const login = () => {
-    axios.post('http://localhost:3001/login', {
+    axios.post('login', {
       username: username,
       password: password
     }).then((response) => {
