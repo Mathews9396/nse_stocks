@@ -6,8 +6,7 @@ const authJwt = require('./middleware/auth');
 
 // parse requests of content-type: application/json
 app.use(express.json());
-
-// app.use(cors());
+app.use(express.static('build'));
 
 const whitelist = ['http://localhost:3000', 'http://localhost:8080']
 const corsOptions = {
