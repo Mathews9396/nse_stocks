@@ -25,11 +25,17 @@ function readFile() {
 	})
 }
 
-// readFile().then(function(data) {
-// 	// console.log(data[0]);
-// 	return data[0];
-// }).catch(function(err) {
-// 	console.log(err);
-// })
-
 module.exports = { readFile };
+
+// axios.interceptors.request.use(
+//     config => {
+//         const user = JSON.parse(localStorage.getItem('user'))
+//         if (user && user.accesstoken) {
+//             config.headers.authorization = `Bearer ${user.accesstoken}`;
+//             return config;
+//         }
+//     },
+//     error => {
+//         return Promise.reject(error);
+//     }
+// )
