@@ -10,9 +10,9 @@
   "scripts": {
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"cd stocks-app && npm react-scripts build",
+    "build":"cd stocks-app && npm run react-scripts build",
     "install-app":"cd stocks-app && npm install",
-    "heroku-postbuild":"npm run install client && npm react-scripts build"
+    "heroku-postbuild":"npm run install client && npm run react-scripts build"
   },
   "keywords": [],
   "author": "",
