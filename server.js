@@ -73,6 +73,10 @@ app.post("/user/create-users", stocks.createUsers);
 
 app.get("/user/get-all-users", stocks.getAllUsers);
 
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static('stocks-app/build'))
+}
+
 // const path = require('path');
 // if (process.env.NODE_ENV === 'production') {
 //   // Serve any static files
