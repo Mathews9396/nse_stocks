@@ -183,6 +183,7 @@ exports.getStockDetail = (req, res) => {
 }
 
 exports.createStocks = (req, res) => {
+    console.log("creating stocks table");
     var createStatament = "CREATE TABLE stocks (Sl_No int, Name char(50), Market_Price float(24), Market_Cap float(24), Stock float(24), Dividend float(24), ROCE float(24), ROE float(24), DebtToEquity float(24), EPS float(24), Reserves float(24), Debt float(24))"
 
     sql.query(createStatament, function (err) {
@@ -194,6 +195,41 @@ exports.createStocks = (req, res) => {
         else {
             console.log("success");
             res.send({ message: "Table created" });
+        }
+    })
+}
+
+exports.createUsers = (req, res) => {
+    console.log("creating users table");
+    var createStatament = "CREATE TABLE users (username char(50), password char(50))"
+
+    sql.query(createStatament, function (err) {
+        if (err)
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while creating the Customer."
+            });
+        else {
+            console.log("success");
+            res.send({ message: "Table for users created" });
+        }
+    })
+}
+
+exports.getAllUsers = (req, res) => {
+    var getStatament = "SELECT * FROM users"
+
+    sql.query(getStatament, function (err, data) {
+        if (err)
+            res.status(500).send({
+                message: err.message || "Some error occurred while getting the users."
+            });
+        else {
+            console.log("getting all users");
+            res.send({
+                message: "Found the records",
+                data: data
+            });
         }
     })
 }

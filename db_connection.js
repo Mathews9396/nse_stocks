@@ -10,7 +10,9 @@ var conn = mysql.createConnection({
 
 conn.connect(error=>{
   if(error) throw error;
+  else
   console.log("Connected to Database!");
 })
 
 module.exports =conn;
+//heroku buildpacks:set heroku/nodejs

@@ -6,24 +6,25 @@ const authJwt = require('./middleware/auth');
 
 // parse requests of content-type: application/json
 app.use(express.json());
+app.use(cors());
 // app.use(express.static('build'));
 
-const whitelist = ['http://localhost:3000', 'http://localhost:8080']
-const corsOptions = {
-  origin: function (origin, callback) {
-    console.log("** Origin of request " + origin)
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      console.log("Origin acceptable")
-      callback(null, true)
-    } else {
-      console.log("Origin rejected")
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
-app.use(cors(corsOptions))
+// const whitelist = ['http://localhost:3000', 'http://localhost:8080']
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     console.log("** Origin of request " + origin)
+//     if (whitelist.indexOf(origin) !== -1 || !origin) {
+//       console.log("Origin acceptable")
+//       callback(null, true)
+//     } else {
+//       console.log("Origin rejected")
+//       callback(new Error('Not allowed by CORS'))
+//     }
+//   }
+// }
+// app.use(cors(corsOptions))
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001 || 3306;
 
 // parse requests of content-type: application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
@@ -61,17 +62,21 @@ app.post("/user/delete-table", stocks.deleteStocks);
 
 app.post("/user/delete-data", stocks.deleteData);
 
+app.post("/create-users", stocks.createUsers);
+
+app.get("/get-all-users", stocks.getAllUsers);
+
 const path = require('path');
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
-  app.use(express.static(path.join(__dirname, 'stocks-app/build')));
+  app.use(express.static(path.join(__dirname, 'build')));
 // Handle React routing, return all requests to React app
   app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'stocks-app/build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
   });
 }
 
 // set port, listen for requests
-app.listen(3001, () => {
+app.listen(`${PORT}`, () => {
   console.log(`Server is running on port ${PORT}`);
 });
