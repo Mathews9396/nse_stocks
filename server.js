@@ -33,8 +33,8 @@ app.use(express.urlencoded({ extended: true }));
 // app.get("/", (req, res) => {});
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, '../build'))
-  // res.json({message:"Welcome to NSE Stocks"});
+  // res.sendFile(path.join(__dirname, '../build'))
+  res.json({message:"Welcome to NSE Stocks"});
   // res.status(200);
 });
 
