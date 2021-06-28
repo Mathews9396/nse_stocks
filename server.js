@@ -30,11 +30,11 @@ const PORT = process.env.PORT || 3001;
 app.use(express.urlencoded({ extended: true }));
 
 //Defining Routes
-app.get("/", (req, res) => {});
+// app.get("/", (req, res) => {});
 
-// app.get("/", (req, res) => {
-//   res.json({ message: "Welcome to NSE Stocks" });
-// });
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to NSE Stocks" });
+});
 
 app.post('/register', stocks.registerUser, (req,res) =>{
   res.json({res});
