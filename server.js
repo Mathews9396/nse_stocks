@@ -33,7 +33,8 @@ app.use(express.urlencoded({ extended: true }));
 // app.get("/", (req, res) => {});
 
 app.get("/", (req, res) => {
-  res.status(200);
+  res.json({message:"Welcome to NSE Stocks"});
+  // res.status(200);
 });
 
 app.get("/stocks", (req, res) => {
