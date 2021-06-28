@@ -225,7 +225,7 @@ exports.getAllUsers = (req, res) => {
                 message: err.message || "Some error occurred while getting the users."
             });
         else {
-            console.log("getting all users");
+            console.log("getting all users",data);
             res.send({
                 message: "Found the records",
                 data: data

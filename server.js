@@ -24,25 +24,15 @@ app.use(cors());
 // }
 // app.use(cors(corsOptions))
 
-const PORT = process.env.PORT || 3001 || 3306;
+const PORT = process.env.PORT || 3001;
 
 // parse requests of content-type: application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
 //Defining Routes
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to NSE Stocks" });
-});
-
-// authJwt.verifyToken,
-app.get("/stocks/all", stocks.getAllStocks, (req, res) => {
-  res.json({ res: res.data });
-});
-
-//authJwt.verifyToken,
-app.get("/stocks/find/:company",  stocks.getOneStock);
-
-app.get("/stocks/all/:id",  stocks.getStockDetail);
+// app.get("/", (req, res) => {
+//   res.json({ message: "Welcome to NSE Stocks" });
+// });
 
 app.post('/register', stocks.registerUser, (req,res) =>{
   res.json({res});
@@ -52,7 +42,16 @@ app.post('/login', stocks.userLogin, (req,res) => {
   res.json({res});
 })
 
-app.post("/sign-in", stocks.authUserLogin);
+// authJwt.verifyToken,
+app.get("/stocks/all", stocks.getAllStocks, (req, res) => {
+  res.json({ res: res.data });
+});
+app.get("/stocks/all/:id",  stocks.getStockDetail);
+
+//authJwt.verifyToken,
+app.get("/stocks/find/:company",  stocks.getOneStock);
+
+// app.post("/sign-in", stocks.authUserLogin);
 
 app.post("/user/create-table", stocks.createStocks);
 
@@ -62,19 +61,19 @@ app.post("/user/delete-table", stocks.deleteStocks);
 
 app.post("/user/delete-data", stocks.deleteData);
 
-app.post("/create-users", stocks.createUsers);
+app.post("/user/create-users", stocks.createUsers);
 
-app.get("/get-all-users", stocks.getAllUsers);
+app.get("/user/get-all-users", stocks.getAllUsers);
 
-const path = require('path');
-if (process.env.NODE_ENV === 'production') {
-  // Serve any static files
-  app.use(express.static(path.join(__dirname, 'build')));
-// Handle React routing, return all requests to React app
-  app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  });
-}
+// const path = require('path');
+// if (process.env.NODE_ENV === 'production') {
+//   // Serve any static files
+//   app.use(express.static(path.join(__dirname, 'build')));
+// // Handle React routing, return all requests to React app
+//   app.get('*', function(req, res) {
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'));
+//   });
+// }
 
 // set port, listen for requests
 app.listen(`${PORT}`, () => {
