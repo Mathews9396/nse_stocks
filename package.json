@@ -8,7 +8,7 @@
   },
   "proxy": "http://localhost:3001",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build":"cd stocks-app && npm run react-scripts build",
     "install-app":"cd stocks-app && npm install",

@@ -1,12 +1,18 @@
-.App {
-  text-align: center;
-  /* padding: 10vh; */
+@font-face {
+  font-family: SF-Pro-Text;
+  src: url(./FontsFree-Net-SFProDisplay-Regular.ttf);
+}
+body, #app, #app>div {
+  /* height: 100%; */
+  background-color: #E0F2FF;
 }
 
-.wrapper-1 {
-  margin-top: 1rem;
-  padding-bottom: 2rem;
-  margin-bottom: 1rem;
+.App {
+  text-align: center;
+  background-color: #E0F2FF;
+  font-family: SF-Pro-Text;
+  display: flex;
+  flex-direction: column;
 }
 
 nav{
@@ -14,7 +20,7 @@ nav{
   justify-content: space-around;
   align-items: center;
   min-height: 10vh;
-  background: rgb(88, 88, 199);
+  background: rgb(111, 111, 165);
 }
 
 .nav-links{
@@ -26,6 +32,23 @@ nav{
   list-style: none;
   font-size: larger;
   font-weight: 500;
+}
+
+.nav-link{
+  text-decoration: none;
+  padding: 0.4rem;
+  font-size: 30px;
+  color: black;
+}
+.nav-link:hover,
+.nav-link:active{
+  color: #E0F2FF;
+  transform: scale(1.1);
+  /* padding-bottom: 0.25rem;
+  border-bottom: 1px solid #95bcf0; */
+}
+.nav-link-active{
+  color: #E0F2FF;
 }
 
 .authentication-header{
@@ -43,14 +66,21 @@ nav{
 
 .username-form{
   display: flex;
+  font-size: 20px;
   flex-direction: row;
   width: 20%;
   padding-bottom: 1rem;
   justify-content: space-evenly;
 }
-
+.auth-form{
+transform: scale(1.1);
+}
+.input-label{
+  padding-right: 1rem;
+}
 .password-form{
   display: flex;
+  font-size: 20px;
   flex-direction: row;
   width: 20%;
   justify-content: space-evenly;
@@ -72,6 +102,28 @@ nav{
 
 .submit-button:hover {
   cursor: crosshair;
+}
+
+.stock-management{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+.stock-management-items{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.stock-management-item{
+  text-decoration: none;
+  margin: 2rem;
+}
+.stock-management-item:hover{
+  transform: scale(1.1);
+}
+.stock-management-item:active{
+  color: rgb(111, 111, 165);
 }
 
 .allstocks {
@@ -133,7 +185,30 @@ nav{
 .stock-details-table th{
   border: 1px solid black;
 }
+.user-management h1{
+  font-size: 55px;
+}
+.user-buttons{
+  display: flex;
+  width: 100%;
+  text-decoration: none;
+  list-style: none;
+  justify-content: center;
+  align-content: center;
+  flex-flow: row wrap;
+  padding: 2rem;
+}
+.user-buttons a{
+  text-decoration: none;
+  justify-content: space-around;
+  padding: 2rem;
 
+  font-size: 30px;
+}
+.user-buttons a:hover{
+  transform: scale(1.1);
+  color: black;
+}
 /* .wrapper{
   display: flex;
   flex-direction: column;

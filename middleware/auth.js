@@ -1,27 +1,33 @@
 const jwt = require("jsonwebtoken");
 const config = require("../config/auth.config");
 
-verifyToken = (req,res,next) =>{ 
+verifyToken = (req, res, next) => {
 
     let bearerHeader = req.headers['authorization'];
- 
-    if(!bearerHeader){
-        return res.status(403).send({
+    console.log("Checking Token");
+    if (!bearerHeader) {
+        console.log("no token recieved");
+        return res.status(403).json({
             message: "No token provided - User is not authorized!"
         })
     }
 
     const bearer = bearerHeader.split(' ');
-    const bearerToken = bearer[1];
+    var bearerToken = bearer[1];
+    bearerToken = bearerToken.slice(1, -1);
     req.token = bearerToken;
 
     jwt.verify(bearerToken, config.secret, (err) => {
-            if(err){
-                return res.status(401).send({message: "User Unauthorized"})
-            }
+        if (err) {
+            console.log("token invalid");
+            return res.status(403).send({ message: "Token not valid" })
+        }
+        else {
+            console.log("token valid - running next request");
+            next();
+        }
     })
 
-    next();
 }
 
 const authJwt = { verifyToken }

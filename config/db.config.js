@@ -1,8 +1,8 @@
-// const hostname = "localhost", username = "root", password = "Mattsql@099", databsename = "nse_stocks";
+const hostname = "localhost", username = "root", password = "Mattsql@099", databsename = "nse_stocks";
 
 // const hostname = "sql6.freemysqlhosting.net", username = "sql6421735", password = "2Y9xb9YZjF", databsename = "sql6421735";
 
-const hostname = "ba9d3dzekdvjdowe3ypg-mysql.services.clever-cloud.com", username = "uvvmzblf3g6n0ncl", password = "UqkiDMkVr5RzPCcdbJAN", databsename = "ba9d3dzekdvjdowe3ypg";
+// const hostname = "ba9d3dzekdvjdowe3ypg-mysql.services.clever-cloud.com", username = "uvvmzblf3g6n0ncl", password = "UqkiDMkVr5RzPCcdbJAN", databsename = "ba9d3dzekdvjdowe3ypg";
 
 module.exports = {
     host: hostname,

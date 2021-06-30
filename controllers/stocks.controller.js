@@ -14,8 +14,8 @@ exports.registerUser = (req, res) => {
         [username], (err, result) => {
             if (result.length > 0) {
                 console.log("user already regsitered ", username);
-                res.status(402).send({
-                    message: "User already registered"
+                res.send({
+                    message: "User already registered!"
                 })
             }
             else {
@@ -49,12 +49,10 @@ exports.userLogin = (req, res) => {
         "SELECT * FROM users where username=? AND password=?",
         [username, password],
         (err, result) => {
+            // console.log(result);
             if (result.length > 0) {
-                // console.log('User authentication approved',result);
-                var jwtUser = { name: username, type: "vigilante" };
-                var token = jwt.sign(jwtUser, secretKey.secret, { expiresIn: 300 * 1000 });
+                var token = jwt.sign({ name: username, type: "vigilante" }, secretKey.secret, { expiresIn: 120 });
                 if (token) {
-                    console.log("User authenticated along with token");
                     res.send({
                         message: "User Authenticated...\nGet your token from console",
                         token: token
@@ -69,8 +67,8 @@ exports.userLogin = (req, res) => {
             }
             else {
                 console.log("User not found!");
-                res.status(404).send({
-                    error: "User not found - Retry!"
+                res.status(403).send({
+                    message: "User not found - Check your credentials or create an account"
                 })
             }
         })
@@ -80,11 +78,12 @@ exports.authUserLogin = (req, res) => {
     try {
         console.log(req.body);
         const { name, password } = req.body;
-        if (name === 'Batman' && password === "iambatman") {
+        console.log(name, password);
+        if (name === 'batman' && password === "iambatman") {
             console.log('User authentication approved');
             var jwtUser = { name: req.body.name, type: "vigilante" };
 
-            var token = jwt.sign(jwtUser, secretKey.secret, { expiresIn: 300 * 1000 });
+            var token = jwt.sign(jwtUser, secretKey.secret, { expiresIn: 1200 });
 
             if (token) {
                 res.json({ token })
@@ -112,7 +111,7 @@ exports.getAllStocks = (req, res) => {
     sql.query(getStatament, function (err, data) {
         if (err)
             res.status(500).send({
-                message: err.message || "Some error occurred while creating the Customer."
+                message: err.message || "Some error occurred while getting the stock details"
             });
         else {
             console.log("getting all companies");
@@ -128,27 +127,25 @@ exports.getOneStock = (req, res) => {
     var name = req.params.company;
     console.log(name);
 
-    var getStatament = `SELECT Name FROM stocks WHERE Name REGEXP \'^${name}\'`
+    var getStatament = `SELECT * FROM stocks WHERE Name REGEXP \'^${name}\'`
 
     sql.query(getStatament, function (err, data) {
-        if (err)
+        if (!data.length > 0) {
+            res.send({
+                message: "no records found"
+            });
+        }
+        else if (data) {
+            res.send({
+                message: "found the records",
+                data: data
+            });
+        }
+        else {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Customer."
+                    err.message || "Some error occurred while finding the stock"
             });
-        else {
-            console.log("ran the api for getting a particular stock");
-            if (data[0] == null)
-                res.send({
-                    message: "no records found"
-                });
-            else {
-                res.send({
-                    message: "found the records",
-                    data: data
-                });
-            }
-
         }
     })
 }
@@ -225,7 +222,7 @@ exports.getAllUsers = (req, res) => {
                 message: err.message || "Some error occurred while getting the users."
             });
         else {
-            console.log("getting all users",data);
+            console.log("getting all users", data);
             res.send({
                 message: "Found the records",
                 data: data

@@ -1,0 +1,19 @@
+.search-bar {
+    width: 40%;
+    background: #F2F1F9;
+    border: none;
+    padding: 1rem;
+}
+
+.search-stock-button {
+    width: 10%;
+    padding: 1rem;
+    font-size: 20px;
+    margin-left: 1rem;
+    background: #8776f7;
+    border: none;
+}
+
+.search-stock-button:hover{
+    color: #f7f7f8;
+}

@@ -1,23 +1,23 @@
 import React from 'react';
 import '../App.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Nav() {
     return (
         <nav>
             <h1>NSE-Stocks</h1>
             <ul className="nav-links">
-                <Link to="">
+                <NavLink to="/welcome" className="nav-link" activeClassName="nav-link-active">
                     <li>Home</li>
-                </Link>
+                </NavLink>
 
-                <Link to="/stocks">
+                <NavLink to="/stocks" className="nav-link" activeClassName="nav-link-active">
                     <li>Stocks</li>
-                </Link>
+                </NavLink>
                 
-                <Link to="/user">
+                <NavLink to="/user" className="nav-link" activeClassName="nav-link-active">
                     <li>Profile</li>
-                </Link>
+                </NavLink>
             </ul>
         </nav>
     )

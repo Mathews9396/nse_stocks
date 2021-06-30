@@ -13,13 +13,17 @@ function StockDetail({ match }) {
     console.log(match);
 
     const fetchItem = async () => {
-        await http.get(`stocks/all/${match.params.id}`,)
-            .then((response) => {
+        await http.get(`stocks/all/${match.params.id}`,{
+            headers: {
+                "content-type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            }   
+        }).then((response) => {
                 var outputStock = response.data.data[0]
-                console.log(outputStock);
+                // console.log(outputStock);
                 setItem(outputStock);
             }).catch((err) => {
-                console.log(err);
+                alert("Need to authenticate to access this page");
                 throw err;
             })
     }
