@@ -8,11 +8,10 @@ const { password, user } = require("../config/db.config");
 exports.registerUser = (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    // console.log(username.length);
     sql.query(
         "SELECT * FROM users where username=?",
         [username], (err, result) => {
-            if (result.length > 0) {
+            if (!err && result.length > 0) {
                 console.log("user already regsitered ", username);
                 res.send({
                     message: "User already registered!"
@@ -51,7 +50,7 @@ exports.userLogin = (req, res) => {
         (err, result) => {
             // console.log(result);
             if (result.length > 0) {
-                var token = jwt.sign({ name: username, type: "vigilante" }, secretKey.secret, { expiresIn: 120 });
+                var token = jwt.sign({ name: username, type: "vigilante" }, secretKey.secret, { expiresIn: 1200 });
                 if (token) {
                     res.send({
                         message: "User Authenticated...\nGet your token from console",
@@ -125,7 +124,6 @@ exports.getAllStocks = (req, res) => {
 
 exports.getOneStock = (req, res) => {
     var name = req.params.company;
-    console.log(name);
 
     var getStatament = `SELECT * FROM stocks WHERE Name REGEXP \'^${name}\'`
 
@@ -152,7 +150,6 @@ exports.getOneStock = (req, res) => {
 
 exports.getStockDetail = (req, res) => {
     var id = req.params.id;
-    console.log(id);
 
     var getStatament = `SELECT * FROM stocks WHERE Sl_No=?`
 

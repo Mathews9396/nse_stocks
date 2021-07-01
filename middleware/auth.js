@@ -4,7 +4,6 @@ const config = require("../config/auth.config");
 verifyToken = (req, res, next) => {
 
     let bearerHeader = req.headers['authorization'];
-    console.log("Checking Token");
     if (!bearerHeader) {
         console.log("no token recieved");
         return res.status(403).json({
@@ -23,7 +22,7 @@ verifyToken = (req, res, next) => {
             return res.status(403).send({ message: "Token not valid" })
         }
         else {
-            console.log("token valid - running next request");
+            console.log("token valid");
             next();
         }
     })
