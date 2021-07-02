@@ -3,6 +3,7 @@ const stocks = require("./controllers/stocks.controller");
 const app = express();
 const cors = require("cors");
 const authJwt = require('./middleware/auth');
+const path=require('path');
 
 // parse requests of content-type: application/json
 app.use(express.json());
@@ -43,6 +44,11 @@ app.get("/stocks/all/:id", authJwt.verifyToken, stocks.getStockDetail, (req, res
   res.json({ res: res.data });
 });
 
+// app.use(express.static(path.join(__dirname, 'build')));
+
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
 
 app.get("/stocks/find/:company", authJwt.verifyToken, stocks.getOneStock);
 
@@ -54,9 +60,9 @@ app.post("/user/delete-table",stocks.deleteStocks);
 
 app.post("/user/delete-data", stocks.deleteData);
 
-// app.post("/user/create-users", authJwt.verifyToken, stocks.createUsers);
+app.post("/user/create-users", stocks.createUsers);
 
-// app.get("/user/get-all-users", authJwt.verifyToken, stocks.getAllUsers);
+app.get("/user/get-all-users", stocks.getAllUsers);
 
 
 app.listen(`${PORT}`, () => {
